@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
+  <test name="Default test(failed)">
+    <classes>
+      <class name="com.qainfotech.tap.training.resourceio.TeamsYamlReaderTest">
+        <methods>
+          <include name="getListOfTeams_should_return_a_list_if_Team_object_from_db_json"/>
+          <include name="loadDB"/>
+        </methods>
+      </class> <!-- com.qainfotech.tap.training.resourceio.TeamsYamlReaderTest -->
+    </classes>
+  </test> <!-- Default test(failed) -->
+</suite> <!-- Failed suite [Default suite] -->

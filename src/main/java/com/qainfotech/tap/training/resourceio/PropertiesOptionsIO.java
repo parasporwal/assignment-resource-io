@@ -21,8 +21,11 @@ public class PropertiesOptionsIO{
     
     public Object getOptionValue(String optionKey) throws IOException {
     	String value=null;
-    	instream=new FileInputStream("F:\\assignment-resource-io\\src\\test\\resources\\options.properties");
+    	/*instream=new FileInputStream("F:\\assignment-resource-io\\src\\test\\resources\\options.properties");
+    	props.load(instream);*/
+    	instream=this.getClass().getClassLoader().getResourceAsStream("options.properties");
     	props.load(instream);
+
     	value=props.getProperty(optionKey);
         /*ResourceBundle bundle=ResourceBundle.getBundle("test.resources.options");
         value=bundle.getString(optionKey);*/

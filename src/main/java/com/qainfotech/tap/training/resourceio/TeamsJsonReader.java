@@ -40,7 +40,8 @@ public class TeamsJsonReader{
 		try
 		{
 		JSONParser parser=new JSONParser();
-		FileReader reader=new FileReader(new File("F:\\assignment-resource-io\\src\\test\\resources\\db.json"));
+		FileReader reader=new FileReader(new File("C:\\Users\\parasporwal\\Desktop\\Assignmet2\\src\\main\\resources\\db.json"));
+		
 		jsonObj=(JSONObject)parser.parse(reader);
 		}
 		catch(IOException |ParseException ex){
@@ -156,17 +157,34 @@ public class TeamsJsonReader{
      * get a list of team objects from db json
      * 
      * @return 
+     * @throws ObjectNotFoundException 
      */
-    public List<Team> getListOfTeams(){
+    public List<Team> getListOfTeams() {
        
-    	//JSONObject jsonObj=JSONLoader();
-    	List<Team> teamList=new ArrayList<>();
+       	List<Team> teamList=new ArrayList<>();
     	Team team=null;
+    	List<Individual> individuals=getListOfIndividuals();
     	JSONArray teamArray=(JSONArray)jsonObj.get("teams");
+    	
     	for(int i=0;i<teamArray.size();i++){
+    	  List<Individual> members=new ArrayList<>();
     	  JSONObject object=(JSONObject) teamArray.get(i);
-    	  Map<String, Object> map=(Map<String, Object>) object.clone();    	 
-    	  team=new Team(map);
+    	  JSONArray  jsonMembersArray=(JSONArray)object.get("members");
+    	  for(int itr=0;itr<jsonMembersArray.size();itr++){
+    		  int id=Integer.parseInt(jsonMembersArray.get(itr).toString());
+    		  Iterator<Individual> individualItr=individuals.iterator();
+    		  while(individualItr.hasNext()){
+    			  Individual individual=individualItr.next();
+    			  if(individual.getId()==id){
+    				  members.add(individual);
+    			  }
+    		  }
+    		 
+    	  }
+    	  //System.out.println(members);
+    	  Map<String, Object> map=(Map<String, Object>) object.clone();    	
+    	  map.put("members",members);
+    	 team=new Team(map);
     	  teamList.add(team);
     	}
     	return teamList;
