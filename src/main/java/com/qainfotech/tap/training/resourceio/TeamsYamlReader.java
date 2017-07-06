@@ -55,13 +55,14 @@ public class TeamsYamlReader {
 	 */
 	public Individual getIndividualById(Integer id) throws ObjectNotFoundException{
 		individualList=getListOfIndividuals();
+		//boolean flag=false;
 		for(Individual individual : individualList){
 			if(individual.getId()==id.intValue()){
 				return individual;
 			}
 		}
 		//System.out.println(individualList);
-		throw new ObjectNotFoundException("Individual Object with id=100 not found", "Id", id.toString());
+		throw new ObjectNotFoundException(Individual.class.getSimpleName(), "id", id.toString());
 		//throw new UnsupportedOperationException("Not implemented.");
 	}
 
@@ -80,7 +81,7 @@ public class TeamsYamlReader {
 				return individual;
 			}
 		}
-		throw new ObjectNotFoundException("object not found", "name", name);
+		throw new ObjectNotFoundException(Individual.class.getSimpleName(), "Name", name);
 	}
 
 
